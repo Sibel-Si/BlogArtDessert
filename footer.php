@@ -4,6 +4,7 @@
 </body>
 <footer>
 	<!-- footer -->
-
+	<p>BlogArt'26</p>
+	<ul> </ul>
 </footer>
 </html>
