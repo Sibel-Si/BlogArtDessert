@@ -4,7 +4,11 @@ include '../../../header.php';
 if(isset($_GET['numMotCle'])){
     $numMotCle = $_GET['numMotCle'];
     $libMotCle = sql_select("MOTCLE", "libMotCle", "numMotCle = $numMotCle")[0]['libMotCle'];
-}
+    
+    $articleWithMotCle = sql_select('MOTCLEARTICLE', 'COUNT(*) as count', "numMotCle = $numMotCle");
+    $articleCount = $articleWithMotCle[0]['count'] ?? 0;
+
+    }
 ?>
 
 <!-- Bootstrap form to create a new statut -->
@@ -13,6 +17,13 @@ if(isset($_GET['numMotCle'])){
         <div class="col-md-12">
             <h1>Suppression Mot Clé</h1>
         </div>
+
+        <?php if($articleCount > 0): ?>
+        <div class="alert alert-warning" role="alert">
+            <strong>⚠️ Attention !</strong> Ce Mot Clé est utilisée par <strong><?php echo $articleCount; ?></strong> article(s). La suppression n'est pas possible tant que des articles sont associés à ce mot clé.
+        </div>
+        <?php endif; ?>
+
         <div class="col-md-12">
             <!-- Form to create a new statut -->
             <form action="<?php echo ROOT_URL . '/api/keywords/delete.php' ?>" method="post">
