@@ -42,3 +42,6 @@ require_once 'config.php';
     </div>
   </div>
 </nav>
+
+<?php include_once __DIR__ . '/src/cookie_banner.php'; ?>
+
