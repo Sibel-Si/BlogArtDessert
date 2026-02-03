@@ -1,6 +1,6 @@
 <?php
 include '../../../header.php'; // contains the header and call to config.php
-
+?>
 <div class="card">
     <div class="card-body">
       <?php if(isset($_SESSION['success_message'])): ?>
