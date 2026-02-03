@@ -1,36 +1,37 @@
-/* Couleurs personnalisées */
-.modal-header {
-    background-color: #C66D25;
-}
+ /* Cookies */
+ /* Couleurs personnalisées */
+ .modal-header {
+     background-color: #C66D25;
+ }
 
-.modal-header h5 {
-    color: white;
-}
+ .modal-header h5 {
+     color: white;
+ }
 
-.btn-primary {
-    background-color: #C66D25;
-    border-color: #C66D25;
-}
+ .btn-primary {
+     background-color: #C66D25;
+     border-color: #C66D25;
+ }
 
-.btn-primary:hover {
-    background-color: #561D0B;
-    border-color: #561D0B;
-}
+ .btn-primary:hover {
+     background-color: #561D0B;
+     border-color: #561D0B;
+ }
 
-.btn-outline-primary {
-    color: #C66D25;
-    border-color: #C66D25;
-}
+ .btn-outline-primary {
+     color: #C66D25;
+     border-color: #C66D25;
+ }
 
-.btn-outline-primary:hover {
-    background-color: #C66D25;
-    color: white;
-}
+ .btn-outline-primary:hover {
+     background-color: #C66D25;
+     color: white;
+ }
 
-.text-cookie {
-    color: #561D0B;
-}
+ .text-cookie {
+     color: #561D0B;
+ }
 
-.modal-content {
-    border: 2px solid #E7A564;
-}
+ .modal-content {
+     border: 2px solid #E7A564;
+ }
