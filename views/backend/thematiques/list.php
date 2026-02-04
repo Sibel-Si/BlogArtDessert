@@ -6,6 +6,7 @@ $thematiques = sql_select("THEMATIQUE", "*");
 ?>
 
 <!-- Bootstrap default layout to display all thematiques in foreach -->
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-12">

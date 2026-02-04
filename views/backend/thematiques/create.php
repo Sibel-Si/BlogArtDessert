@@ -46,3 +46,7 @@ function validateForm() {
     return true;
 }
 </script>
+
+<?php
+include '../../../footer.php'; 
+?>
