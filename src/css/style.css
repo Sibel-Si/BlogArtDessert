@@ -1,9 +1,3 @@
- /*général*/
- body {
-        font-family: 'Della Respira', serif;
-        background-color: #F7E6CA;
-        color: #561D0B;
-    }
 /* Palette de couleurs */
 :root {
     --bg-beige: #F2D8B3;        /* Fond de page */
@@ -22,10 +16,6 @@ body {
 
 /*header*/
 
-    .navbar {
-        background-color: #E7A564;
-        color: #561D0B;
-    }
 .navbar {
     background-color: var(--caramel);
     color: var(--chocolat);
@@ -94,11 +84,8 @@ body {
 /* Dashboard Admin */
 .box-info {
     color: rgb(0, 0, 0);
-    background-color: #E7A564;
     background-color: var(--caramel);
     font-size: 30px;
-    padding-left: 3rem ;
-    word-wrap: break-word"
     padding-left: 3rem;
     word-wrap: break-word;
 }
