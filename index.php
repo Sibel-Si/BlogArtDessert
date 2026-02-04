@@ -47,3 +47,25 @@ require_once 'header.php';
 </div>
 
 <?php require_once 'footer.php'; ?>
+<div class="homepage-content">
+    <div class="homepage-images">
+        <!-- Image 1: Cannelés (haut gauche, asymétrique) -->
+        <div class="image-box image-cannele">
+            <img src="/src/images/cannele.jpg" alt="Cannelés Bordelais">
+            <div class="image-caption">CANNELÉS AUTHENTIQUES</div>
+        </div>
+
+        <!-- Image 2: Fondant au Chocolat (bas droite, asymétrique) -->
+        <div class="image-box image-fondant">
+            <img src="/src/images/fondant-chocolat.jpg" alt="Fondant au Chocolat">
+            <div class="image-caption">FONDANT AU CHOCOLAT</div>
+        </div>
+    </div>
+</div>
+
+<!-- DÉCORATION FINALE -->
+<div class="homepage-decoration">
+    🥐 ✨ 🍰 ✨ 🥐
+</div>
+
+<?php require_once 'footer.php'; ?>
