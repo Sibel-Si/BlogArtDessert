@@ -1,10 +1,29 @@
 <!-- Load JS scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script href="css/style.css"></script>
 
-</body>
+
 <footer>
 	<!-- footer -->
 	<p>BlogArt'26</p>
-	<ul> </ul>
+	<ul>
+		<li>Sterenn Piga-Chavigny</li>
+		<li>Viktoriia Rudenko</li>
+		<li>Yassmine Rgana El Hami</li>
+		<li>Maïlyse Wilson</li>
+		<li>Sever Sibel</li>
+	</ul>
+	<div>
+		<p>Plan du Site :</p>
+		<p>Evenement</p>
+		<p>Acteur</p>
+		<p>Insolite</p>
+	</div>
+	<div>
+		<p>Mentions légales</p>
+		<p><a href="/views/frontend/rgpd/rgpd.php">RGPD</a></p>
+		<p><a href="/views/frontend/rgpd/cgu.php">CGU</a></p>
+	</div>
 </footer>
+</body>
 </html>

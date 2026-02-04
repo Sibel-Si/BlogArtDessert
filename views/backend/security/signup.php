@@ -1,5 +1,6 @@
 <?php
 include '../../../header.php';
+<<<<<<< HEAD
 ?>
 
 <div class="button-group">
@@ -157,3 +158,6 @@ function validateSignupForm() {
 </style>
 
 <?php require_once '../../../footer.php'; ?>
+=======
+?>
+>>>>>>> f70bb8979ebf20404b9dc9aad15f9fdfd6f9d48d
