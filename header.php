@@ -24,7 +24,7 @@ require_once 'config.php';
 <nav class=" navbar-expand-lg navbar">
   <div class="container-fluid">
     <div>
-      <img src="<?php echo ROOT_URL . '/src/images/logoBlogArt.png'?>" alt="Logo Les Délices Bordelais" width="50" height="50" class="d-inline-block align-text-top m-1">
+      <img src="<?php echo ROOT_URL . '/src/images/canele-illu.png'?>" alt="Logo Les Délices Bordelais" height="50" class="d-inline-block align-text-top"/>
       <a class="navbar-brand navbar d-inline-block  align-text-top" href="#">Les Délices Bordelais</a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

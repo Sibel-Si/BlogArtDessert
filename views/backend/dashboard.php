@@ -1,6 +1,5 @@
 <?php
 include '../../header.php';
-
 ?>
 
 <!-- Bootstrap admin dashboard template -->
