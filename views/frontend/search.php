@@ -5,6 +5,7 @@ require_once '../../header.php';
 <!-- <h1>Recherche Avancée</h1>
 <h2>Rechercher par thèmes</h2>
 <h2>Recherche libre</h2> -->
+
 <br/>
 <!--search bar de la page-->
 <h2>Rechercher par mots clés</h2>
@@ -18,23 +19,35 @@ require_once '../../header.php';
     </div>
     </nav>
 
+<!--tableau d'affichage-->
+<table class="table">
+<thead>
+    <tr>
+        <th scope="col">Résultats Mots Clés</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td><?php echo($recherFinal) ?></td>
+    </tr>
+</tbody>
+</table>
+
 <?php 
 
 //SELECT * FROM article WHERE libTitrArt LIKE '%n%';
 
-//on reprend avec un $_post les éléments placés dans la barre de recherche
-$motcle= $_POST["recherche"];
+$motcle= isset($_POST["recherche"]);
 
 //si motcle existe, on la place dans une variable
 if(isset($motcle)){
     $rechercheTitr = $motcle["recherche"];
+    $recherFinal = sql_select("ARTICLE", "*", "libTitrArt LIKE '%$rechercheTitr%'");
+    echo($recherFinal);
 }
 
-//on fait une recherche dans la BDD avec les requetes souhaitees
-$recherFinal = sql_select("ARTICLE", "*", "libTitrArt LIKE '%$rechercheTitr%'");
-
-//on affiche le résultat
-echo($recherFinal); ?>
+?>
 
 <?php
 require_once '../../footer.php';
