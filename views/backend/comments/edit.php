@@ -5,7 +5,12 @@ $articles = sql_select("ARTICLE", "*");
 $membres = sql_select("MEMBRE", "*");
 $commentaires = sql_select("COMMENT", "*");
 $libCom = sql_select("COMMENT","libCom");
-$affichageNumCom = sql_select("COMMENT", "numCom");
+
+
+if(isset($_GET["numCom"])){
+    $numComment = $_GET["numCom"];
+    $affichageNumCom = sql_select("COMMENT", "numCom", "numCom = $numComment");
+}
 
 //au clic bouton edit, affichage des données sur les parties correspondantes
 
@@ -34,7 +39,7 @@ $affichageNumCom = sql_select("COMMENT", "numCom");
                 <div class="form-group">
                     <label for="numCom">Numéro commentaire</label>
                     <select id="numCom" name="numCom" class="form-control" autofocus="autofocus" >
-                        <?php echo($affichageNumCom["numCom"] = $commentaire['dtCreaCom']);
+                        <?php echo($affichageNumCom["numCom"]);
                             //à modifier pour faire en sorte qu'en appuyant sur le bouton, ça affiche directement le numéro de commentaire qui est égal à la date correspondante dans l'url
                         ?>
                     </select>
@@ -51,8 +56,8 @@ $affichageNumCom = sql_select("COMMENT", "numCom");
                     <label for="libStat" class = "disabled">Titre Article</label>
                     <select id="numMemb" name="numMemb" class="form-control" autofocus="autofocus" >
                         <?php
-                        foreach($articles as $article){ //selection articles
-                            echo('<option value ="'. $article["numArt"]. '">'. $article['libTitrArt']. '</option>');
+                        foreach($articles as $article){
+                            echo('value ="'. $article["numCom"] . $article['libTitrArt']);
                         }
                         ?>
                     </select>
@@ -71,7 +76,7 @@ $affichageNumCom = sql_select("COMMENT", "numCom");
                 <h2>Commentaire</h2>
                 <div class="form-group">
                     <label for="libStat" class = "disabled">Commentaire à Valider</label>
-                    <textarea id="libStat" name="libStat" class="form-control"><?php echo($commentaires["libCom"])?></textarea>
+                    <textarea id="libStat" name="libStat" class="form-control"><?php echo($commentaires["libCom"]); ?></textarea>
                 </div>
                 <label class="form-label mt-4">Je valide le commentaire du membre?</label>
                 <div class="d-flex gap-3">
