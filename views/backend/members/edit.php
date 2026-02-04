@@ -1,9 +1,5 @@
 <?php
-include '../../../header.php';
-
-
-
-// Get member ID from GET parameter
+include '../../../header.php';// Get member ID from GET parameter
 if (!isset($_GET['numM'])) {
     $_SESSION['error_message'] = "ID du membre manquant.";
     header('Location: list.php');
