@@ -1,4 +1,16 @@
 <?php
+session_start();
+require_once ROOT_URL . '/functions/security.php';
+
+// Define the required level (e.g., 1 for Admin, 2 for Moderator)
+$required_level = 1; 
+
+if (!check_access($required_level)) {
+    // Redirect unauthorized users to login or an error page
+    header("Location: login.php?error=unauthorized");
+    exit(); // Always exit after a header redirect
+}
+
 include '../../../header.php';
 
 $articles = sql_select("ARTICLE", "*");
@@ -6,13 +18,14 @@ $membres = sql_select("MEMBRE", "*");
 $commentaires = sql_select("COMMENT", "*");
 $libCom = sql_select("COMMENT","libCom");
 
+$affichageNumArt = sql_select("ARTICLE, COMMENT", "*", "article.numArt = comment.numCom");
 
 if(isset($_GET["numCom"])){
     $numComment = $_GET["numCom"];
     $affichageNumCom = sql_select("COMMENT", "numCom", "dtCreaCom = $numComment");
 }
 
-//au clic bouton edit, affichage des données sur les parties correspondantes
+
 
 
 // récuparation avec session  puis affichage nom prénom
@@ -28,10 +41,8 @@ if(isset($_GET["numCom"])){
                 <div class="form-group">
                     <label for="numArt">Numéro article</label>
                     <select id="numArt" name="numArt" class="form-control" autofocus="autofocus" >
-                        <?php
-                        foreach($articles as $article){ //selection numéro commentaire
-                            echo('');
-                        } //à modifier pour faire en sorte qu'en appuyant sur le bouton, ça affiche directement le numéro de l'article
+                        <?php //selection numéro commentaire
+                            echo($affichageNumArt["numArt"]);//à modifier pour faire en sorte qu'en appuyant sur le bouton, ça affiche directement le numéro de l'article
                         ?>
                     </select>
                 </div>

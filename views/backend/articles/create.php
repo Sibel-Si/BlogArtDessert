@@ -1,4 +1,6 @@
 <?php
+
+
 include '../../../header.php';
 
 $articles = sql_select("ARTICLE", "*");

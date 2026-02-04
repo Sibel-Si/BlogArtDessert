@@ -1,4 +1,6 @@
 <?php
+
+
 include '../../../header.php';
 
 // Get the article ID from URL parameter
