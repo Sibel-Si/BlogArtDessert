@@ -4,6 +4,21 @@
         background-color: #F7E6CA;
         color: #561D0B;
     }
+/* Palette de couleurs */
+:root {
+    --bg-beige: #F2D8B3;        /* Fond de page */
+    --caramel: #C68642;          /* Bannière héro */
+    --chocolat: #4B2414;         /* Texte & rayures sombres */
+    --sable: #E6C9A8;            /* Champs de saisie */
+    --creme-claire: #F9F1E7;     /* Rayures claires */
+}
+
+/*général*/
+body {
+    font-family: 'Della Respira', serif;
+    background-color: var(--bg-beige);
+    color: var(--chocolat);
+}
 
 /*header*/
 
@@ -11,6 +26,10 @@
         background-color: #E7A564;
         color: #561D0B;
     }
+.navbar {
+    background-color: var(--caramel);
+    color: var(--chocolat);
+}
  
  /* Cookies */
  /* Couleurs personnalisées */
@@ -79,5 +98,133 @@
     font-size: 30px;
     padding-left: 3rem ;
     word-wrap: break-word"
+    padding-left: 3rem;
+    word-wrap: break-word;
+}
+
+/* ===== HOMEPAGE DESIGN - ARTISANAL BAKERY ===== */
+
+/* Bande supérieure rayée - PLEIN ÉCRAN */
+.striped-band-top {
+    height: 30vh;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: repeating-linear-gradient(90deg,
+        var(--chocolat) 0 30px,
+        var(--creme-claire) 30px 60px);
+    position: relative;
+}
+
+/* Bannière héro caramel avec titre */
+.hero-banner {
+    background-color: var(--caramel);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.hero-banner h1 {
+    color: #000;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Bande inférieure rayée - PLEIN ÉCRAN */
+.striped-band-bottom {
+    height: 30vh;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: repeating-linear-gradient(90deg,
+        var(--chocolat) 0 30px,
+        var(--creme-claire) 30px 60px);
+    position: relative;
+    margin-bottom: 40px;
+}
+
+/* Conteneur des images asymétriques */
+.hero-images-container {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    padding: 0;
+}
+
+/* Image gauche - haut à gauche juste après le header */
+.image-left {
+    position: absolute;
+    left: 40px;
+    top: -55vh;
+    width: 450px;
+    height: 450px;
+    background-color: var(--sable);
+    border: 8px solid var(--chocolat);
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+.image-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Image droite - bas à droite */
+.image-right {
+    position: absolute;
+    right: 40px;
+    bottom: 290px;
+    width: 450px;
+    height: 450px;
+    background-color: var(--sable);
+    border: 8px solid var(--chocolat);
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+.image-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .hero-banner h1 {
+        font-size: 2.5rem;
+    }
+
+    .striped-band-top, .striped-band-bottom {
+        height: 20vh;
+    }
+
+    .image-left, .image-right {
+        width: 300px;
+        height: 300px;
+        border: 6px solid var(--chocolat);
+    }
+
+    .hero-images-container {
+        height: 450px;
+    }
+
+    .image-left {
+        left: 20px;
+        top: -20vh;
+    }
+
+    .image-right {
+        right: 20px;
+        bottom: -10px;
+    }
 }
 
