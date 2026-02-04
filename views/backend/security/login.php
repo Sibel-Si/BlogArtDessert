@@ -1,6 +1,14 @@
 <?php
 include '../../../header.php';
+
+$err = $_SESSION['login_error'] ?? '';
+unset($_SESSION['login_error']);
 ?>
+
+<?php if (!empty($err)) : ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($err) ?></div>
+<?php endif; ?>
+
 <div class="container mt-5" style="max-width: 500px;">
     
     <h2 class="mb-4 text-center">
@@ -25,7 +33,7 @@ include '../../../header.php';
             </label>
         </div>
 
-        <!-- CAPTCHA (visuel seulement si вже є) -->
+        <!-- CAPTCHA (visuel seulement ) -->
         <div class="mt-3">
             <button type="button" class="btn btn-light w-100" disabled>
                 Captcha
