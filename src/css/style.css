@@ -88,3 +88,8 @@
 .hyperliens:hover{
     color: #F7E6CA;
 }
+/*largeur page cgs rgdb*/
+.width{
+    max-width: 80%;
+    margin : auto;
+}
