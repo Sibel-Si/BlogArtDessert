@@ -1,18 +1,16 @@
 <?php
 include '../../../header.php'; // contains the header and call to config.php
-
-$thematiques = [];
-try {
-    $thematiques = getThematiques();
-} catch (Exception $e) {
-    $_SESSION['error_message'] = 'Erreur lors du chargement des thématiques: ' . $e->getMessage();
-}
 ?>
+<?php
+include '../../../header.php';
+?>
+
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Liste des Thématiques</h1>
+            <h1>Création nouvelle Thématique</h1>
+            
             
             <?php if(isset($_SESSION['error_message'])): ?>
                 <div class="alert alert-danger" role="alert">
@@ -26,37 +24,31 @@ try {
             <?php endif; ?>
         </div>
         <div class="col-md-12">
-            <a href="create.php" class="btn btn-success mb-3">+ Créer une nouvelle thématique</a>
             
-            <?php if (count($thematiques) > 0): ?>
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom de la thématique</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($thematiques as $thematique): ?>
-                            <tr>
-                                <td><?php echo $thematique['idThem']; ?></td>
-                                <td><?php echo htmlspecialchars($thematique['libThem']); ?></td>
-                                <td>
-                                    <a href="edit.php?id=<?php echo $thematique['idThem']; ?>" class="btn btn-warning btn-sm">Modifier</a>
-                                    <a href="delete.php?id=<?php echo $thematique['idThem']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr?');">Supprimer</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <div class="alert alert-info" role="alert">
-                    Aucune thématique trouvée. <a href="create.php">Créer la première</a>
+            <form action="<?php echo ROOT_URL . '/api/thematiques/create.php' ?>" method="post" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="libThem">Nom de la thématique <span class="text-danger">*</span></label>
+                    <input id="libThem" name="libThem" class="form-control" type="text" autofocus="autofocus" required />
                 </div>
-            <?php endif; ?>
+                <br />
+                <div class="form-group mt-2">
+                    <a href="list.php" class="btn btn-primary">List</a>
+                    <button type="submit" class="btn btn-success">Confirmer create ?</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+function validateForm() {
+    const libThem = document.getElementById('libThem').value.trim();
+    if (libThem === '') {
+        alert('Le nom de la thématique est obligatoire.');
+        return false;
+    }
+    return true;
+}
+</script>
 
 
