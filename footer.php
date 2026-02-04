@@ -32,12 +32,12 @@
 </footer> -->
 
 
-<footer class="row row-cols-5 py-5 my-5 border-top">
+<footer class="row row-cols-5 py-5 my-5 border-top navbar">
 	<div class="col">
 	<a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
 		<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
 	</a>
-	<p class="text-muted">Blog'Art 2026</p>
+	<p class="">Blog'Art 2026</p>
 	</div>
 
 	<div class="col">
@@ -47,28 +47,28 @@
 	<div class="col">
 	<h5>Crédits du Site</h5>
 	<ul class="nav flex-column">
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sterenn Piga-Chavigny</a></li>
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Viktoriia Rudenko</a></li>
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Yassmine Rgana El Hami</a></li>
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Maïlyse Wilson</a></li>
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sibel Sever</a></li>
+		<li class="nav-item mb-2">Sterenn Piga-Chavigny</li>
+		<li class="nav-item mb-2">Viktoriia Rudenko</li>
+		<li class="nav-item mb-2">Yassmine Rgana El Hami</li>
+		<li class="nav-item mb-2">Maïlyse Wilson</li>
+		<li class="nav-item mb-2">Sibel Sever</li>
 	</ul>
 	</div>
 
 	<div class="col">
 	<h5>Plan du Site</h5>
 	<ul class="nav flex-column">
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Evénements</a></li>
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Acteurs</a></li>
-		<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Insolite</a></li>
+		<li class="nav-item mb-2"><a href="/views/frontend/events.php" class="nav-link p-0 hyperliens">Evénements</a></li>
+		<li class="nav-item mb-2"><a href="/views/frontend/actors.php" class="nav-link p-0 hyperliens">Acteurs</a></li>
+		<li class="nav-item mb-2"><a href="/views/frontend/original.php" class="nav-link p-0 hyperliens">Insolite</a></li>
 	</ul>
 	</div>
 
 	<div class="col">
 	<h5>Mentions Légales</h5>
 	<ul class="nav flex-column">
-		<li class="nav-item mb-2"><a href="/views/frontend/rgpd/cgu.php" class="nav-link p-0 text-muted">CGU</a></li>
-		<li class="nav-item mb-2"><a href="/views/frontend/rgpd/rgpd.php" class="nav-link p-0 text-muted">RGPD et Cookies</a></li>
+		<li class="nav-item mb-2"><a href="/views/frontend/rgpd/cgu.php" class="nav-link p-0 hyperliens">CGU</a></li>
+		<li class="nav-item mb-2"><a href="/views/frontend/rgpd/rgpd.php" class="nav-link p-0 hyperliens">RGPD et Cookies</a></li>
 	</ul>
 	</div>
 </footer>
