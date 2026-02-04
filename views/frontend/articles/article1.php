@@ -4,7 +4,7 @@ require_once '../../../header.php';
 <?php
 
 // Get the article ID from URL parameter
-$numArt = isset($_GET['numArt']) ? (int)$_GET['numArt'] : 0;
+$numArt = isset($_GET['numArt']) ? (int)$_GET['numArt'] : 1;
 
 // Validate article ID exists before querying
 if ($numArt <= 0) {
@@ -34,18 +34,24 @@ $libConclArt = $article['libConclArt'] ?? "Conclusion de l'article";
 $urlPhotArt = $article['urlPhotArt'] ?? "/src/uploads/default.png";
 
 // Fetch necessary data from the database
-$themes = sql_select("THEMATIQUE", "*", "numArt = $numArt");
+$themes = sql_select("THEMATIQUE", "*");
 
-$numThem = $article['libChapoArt'] ?? 0;
+$numThem = $article['numThem'] ?? 0;
 $theme = $themes['numThem'] ?? "Thématique par défaut";
 
-$numMotCles = sql_select("MOTCLEARTICLE", "*", "numArt = $numArt");
-$motscles = sql_select("MOTCLE", "*", "numMotCle = $numMotCles");
+$motsClesArt = sql_select("MOTCLEARTICLE", "numMotCle", "numArt = $numArt");
+if (!empty($motsClesArt)) {
+    // On transforme le tableau de résultats en une liste d'IDs (ex: "1, 4, 8")
+    $ids = implode(',', array_column($motsClesArt, 'numMotCle'));
+    $motscles = sql_select("MOTCLE", "*", "numMotCle IN ($ids)");
+} else {
+    $motscles = [];
+}
 
 $likes = sql_select("LIKEART", "*", "numArt = $numArt");
 $nbLikes = count($likes);
 
-$comments = sql_select("COMMENT", "*", "numArt = $numArt");
+$comments = sql_select("COMMENT", "*", "numArt = $numArt AND attModOK = 1");
 $nbComments = count($comments);
 
 
@@ -55,9 +61,9 @@ $nbComments = count($comments);
 	<article class="article-template">
 		<h1><?php echo $libTitrArt; ?></h1>
 
-		<p class="meta">Publié le <time datetime="<?php echo $dtCreaArt; ?>"></time></p>
-		<p class="meta">Nombre de commentaires : <?php  echo $nbLikes; ?></p>
-        <p class="meta">Nombre de likes : <?php  echo $nbComments; ?></p>
+		<p class="meta">Publié le <?php echo $dtCreaArt; ?></p>
+		<p class="meta">Nombre de commentaires : <?php  echo $nbComments; ?></p>
+        <p class="meta">Nombre de likes : <?php  echo $nbLikes; ?></p>
 
 		<p class="chapeau"><?php echo $libChapoArt; ?></p>
 
@@ -95,14 +101,15 @@ $nbComments = count($comments);
         <div>
             <h3>Commentaires (<?php echo $nbComments; ?>)</h3>
             <?php foreach ($comments as $comment) { ?>
-                <div>
-                    <p><?php 
+                <div><?php					
                     $membre = sql_select("MEMBRE", "*", "numMemb = " . $comment['numMemb']);
-                    echo htmlspecialchars($membre['pseudoMemb']); ?> a écrit :</p>
-                    <p><?php echo nl2br(htmlspecialchars($comment['libCom'])); ?></p>
-                </div>
+					$pseudo = !empty($membre) ? $membre[0]['pseudoMemb'] : "Anonyme";
+					echo htmlspecialchars($pseudo."a écrit :"); 
+                    echo nl2br(htmlspecialchars($comment['libCom']));
+				?></div>
             <?php } ?>
-            <a href="../comments/commentaire.php" class="btn">Ajputer un commentaire</a>
+            <a href="../comments/commentaire.php" class="btn">Ajouter un commentaire</a>
+
         </div>
 
 	</article>

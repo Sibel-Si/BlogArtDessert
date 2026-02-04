@@ -16,7 +16,7 @@
       <div class="modal-body">
         <p>
           Ce site utilise des cookies afin de vous garantir la meilleure expérience possible.
-          <a class="d-block" href="#" style="color:#C66D25;">En savoir plus sur les cookies</a>
+          <a class="d-block" href="../views/frontend/rgpd/rgpd.php" style="color:#C66D25;">En savoir plus sur les cookies</a>
         </p>
       </div>
 
