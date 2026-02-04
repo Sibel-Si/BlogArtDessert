@@ -1,9 +1,10 @@
- /*général*/
+/*genéral*/
  body {
-        font-family: 'Della Respira', serif;
         background-color: #F7E6CA;
         color: #561D0B;
+        font-family: 'della respira', sans-serif;
     }
+
 
 /*header*/
 
@@ -72,7 +73,7 @@
      outline: #561D0B;
  }
 
-/* Dashboard Admin */
+/* Admin */
 .box-info {
     color: rgb(0, 0, 0);
     background-color: #E7A564;
@@ -82,6 +83,17 @@
 }
 
 /* hyperliens */
-.liens{
+.hyperliens{
     color: #561D0B;
+}
+.hyperliens:hover{
+    color: #F7E6CA;
+}
+
+
+
+/*largeur page cgs rgdb*/
+.width{
+    max-width: 80%;
+    margin : auto;
 }

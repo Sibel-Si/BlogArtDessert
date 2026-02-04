@@ -1,9 +1,5 @@
 <?php
-include '../../../header.php';
-
-
-
-// Get member ID from GET parameter
+include '../../../header.php';// Get member ID from GET parameter
 if (!isset($_GET['numM'])) {
     $_SESSION['error_message'] = "ID du membre manquant.";
     header('Location: list.php');
@@ -123,8 +119,8 @@ $dtCrea = isset($member['dtCreaMemb']) ? $member['dtCreaMemb'] : 'N/A';
 
 
 				<div class="d-flex gap-3 mt-4">
-					<a href="list.php" class="btn btn-outline-primary">List</a>
-					<button type="submit" class="btn btn-outline-warning">Confirmer Edit ?</button>
+					<a href="list.php" class="btn btn-moyen">List</a>
+					<button type="submit" class="btn btn-fonce">Confirmer Edit ?</button>
 				</div>
 			</form>
 		</div>

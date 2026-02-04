@@ -1,9 +1,14 @@
 <?php
 //load config
 require_once 'config.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 ?>
+
 <!DOCTYPE html>
-<html lang="fr-FR">
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
