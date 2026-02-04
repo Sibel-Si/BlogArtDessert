@@ -1,9 +1,4 @@
- /*général*/
- body {
-        font-family: 'Della Respira', serif;
-        background-color: #F7E6CA;
-        color: #561D0B;
-    }
+
 
 /*header*/
 
@@ -88,6 +83,9 @@
 .hyperliens:hover{
     color: #F7E6CA;
 }
+
+
+
 /*largeur page cgs rgdb*/
 .width{
     max-width: 80%;
