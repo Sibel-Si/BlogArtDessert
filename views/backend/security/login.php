@@ -31,7 +31,7 @@ unset($_SESSION['login_error']);
         <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
 
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-success">Se connecter</button>
+            <button type="submit" class="btn btn-fonce">Se connecter</button>
         </div>
 
         <div class="text-center mt-3">

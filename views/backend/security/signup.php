@@ -48,7 +48,7 @@ include '../../../header.php';
         <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-success w-100">Créer mon compte</button>
+            <button type="submit" class="btn btn-fonce w-100">Créer mon compte</button>
         </div>
 
     </form>
