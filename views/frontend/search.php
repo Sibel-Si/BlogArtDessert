@@ -6,17 +6,18 @@ require_once '../../header.php';
 
 <?php 
 
-//SELECT * FROM article WHERE libTitrArt LIKE '%n%';
+//SELECT libTitrArt FROM article WHERE libTitrArt LIKE '%n%';
 
 $motcle = $_GET["recherche"] ?? "";
+$recherche = null;
 $recherFinal = null;
 
 //si motcle existe, on la place dans une variable
 if(isset($motcle)){
-    $recherFinal = sql_select("ARTICLE", "*", "libTitrArt LIKE '%$motcle%'");
+    $recherFinal = sql_select("ARTICLE", "libTitrArt", "libTitrArt LIKE '%$motcle%'");
 }
 
-var_dump($_SERVER);
+// var_dump($_SERVER);
 ?>
 
 <!-- <h1>Recherche Avancée</h1>
@@ -30,7 +31,7 @@ var_dump($_SERVER);
     <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <form class="d-flex" role="search"  action="<?php echo($_SERVER["PHP_SELF"]) ?>" method="get">
-        <input class="form-control me-2" id="recherche" type="search" placeholder="Rechercher sur le site..." aria-label="Search" value="<?php echo($motcle) ?>">
+        <input class="form-control me-2" id="recherche" name ="recherche" type="search" placeholder="Rechercher sur le site..." aria-label="Search" value="<?php echo($motcle) ?>">
         <button class="btn btn-fonce" type="submit">Recherche avancée</button>
         </form>
     </div>
@@ -46,10 +47,11 @@ var_dump($_SERVER);
 <tbody>
     <tr>
         <td><?php 
-        // foreach (){
-        //     echo($recherFinal);
-        // }
-        var_dump($recherFinal)
+        foreach ($recherFinal as $recherche){ //affichage des recherches
+            echo($recherche)["libTitrArt"];
+            ?><br /><?php
+        }
+        // var_dump($recherFinal);
         ?></td>
     </tr>
 </tbody>
