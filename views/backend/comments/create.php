@@ -5,7 +5,7 @@ include '../../../header.php';
 
 // $numCom = intval($_GET["numCom"]);
 //SELECT * FROM article INNER JOIN membre ON article.numMemb = membre.numMemb;
-$commentaire = sql_select("article INNER JOIN membre ON article.numMemb = membre.numMemb INNER JOIN", "*");
+$commentaire = sql_select("comment INNER JOIN membre ON comment.numMemb = membre.numMemb INNER JOIN article ON comment.numArt = article.numArt", "*");
 $commentaire = $commentaire[0];
 // var_dump($commentaire);
 
@@ -26,9 +26,7 @@ $commentaire = $commentaire[0];
                 <br />
                 <div class="form-group">
                     <label for="libStat" >Nom</label>
-                    <input id="libStat" name="libStat" class="form-control" type="text" value="<?php /*
-                    $nomMembActu = sql_select("MEMBRE", "nomMemb", "pseudoMemb =" $pseudoMemb);
-                    echo() */?>" disabled /> <!--récup choix id prenom + nom avant de les envoyer-->
+                    <input id="libStat" name="libStat" class="form-control" type="text" value=""/> <!--récup choix id prenom + nom avant de les envoyer-->
                 </div>
                 <br />
                 <div class="form-group">
@@ -49,14 +47,18 @@ $commentaire = $commentaire[0];
                 <h2>Commentaire</h2>
                 <div class="form-group">
                     <label for="libStat" class = "disabled">Création d'un commentaire</label>
-                    <textarea id="libStat" name="libStat" class="form-control">Entrez le commentaire</textarea>
+                    <textarea id="libStat" name="libStat" placeholder ="Entrez le commentaire" class="form-control"></textarea>
                 </div>
                 <div class="form-group mt-2">
                     <button type="submit" class="btn btn-clair">Poster</button>
                 </div>
             </form>
-            <h3> Commentaires de l'article :<?php echo("")?></h3>
-            
+            <br />
+            <h3> Commentaires de l'article :<?php echo($commentaire["numCom"])?></h3>
+            <h4><?php echo($commentaire["pseudoMemb"]);?></h4>
+            <?php echo($commentaire["libCom"]);?>
+            <br />
+            <?php echo($commentaire["dtCreaCom"]);?> <br /><br />
             <a href="list.php" class="btn btn-moyen">List</a>
         </div>
     </div>
