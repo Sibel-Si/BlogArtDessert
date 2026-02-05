@@ -3,57 +3,67 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Config + functions (CRUD, ctrlSaisies, etc.)
 require_once __DIR__ . '/../../config.php';
 require_once __DIR__ . '/../../functions/global.inc.php';
 require_once __DIR__ . '/../../functions/ctrlSaisies.php';
 
-// 1. Vérifier que le formulaire est envoyé
-if (!isset($_POST['pseudoMemb'], $_POST['passMemb'])) {
+if (!isset($_POST['pseudoMemb'], $_POST['passMemb'], $_POST['g-recaptcha-response'])) {
     header('Location: /views/backend/security/login.php');
     exit;
 }
 
-// 2. Sécurisation des saisies (fonction fournie)
 $pseudo = ctrlSaisies($_POST['pseudoMemb']);
 $pass   = ctrlSaisies($_POST['passMemb']);
+$captchaRes = $_POST['g-recaptcha-response'];
 
-// 3. Vérification champs vides
 if ($pseudo === '' || $pass === '') {
     $_SESSION['login_error'] = "Champs obligatoires manquants.";
     header('Location: /views/backend/security/login.php');
     exit;
 }
 
-// 4. Récupération du membre (CRUD -> SELECT)
+$secretKey = "6LcBgWAsAAAAAPOCwFqU7RpKNOrAZV6tagbaKL5S";
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+    'secret'   => $secretKey,
+    'response' => $captchaRes
+]));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+curl_close($ch);
+
+$captchaSuccess = json_decode($response);
+
+if (!$captchaSuccess->success || $captchaSuccess->score < 0.5) {
+    $_SESSION['login_error'] = "Vérification reCAPTCHA échouée.";
+    header('Location: /views/backend/security/login.php');
+    exit;
+}
+
 $membre = sql_select(
     'membre',
     '*',
     "pseudoMemb = '$pseudo'"
 );
 
-// 5. Vérifier si le membre existe
 if (!$membre || count($membre) !== 1) {
     $_SESSION['login_error'] = "Pseudo ou mot de passe incorrect.";
     header('Location: /views/backend/security/login.php');
     exit;
 }
 
-// 6. Vérification du mot de passe (PLAIN TEXT)
 if ($pass !== $membre[0]['passMemb']) {
     $_SESSION['login_error'] = "Pseudo ou mot de passe incorrect.";
     header('Location: /views/backend/security/login.php');
     exit;
 }
 
-// 7. Connexion réussie → session
 $_SESSION['id_user '] = $membre[0]['numMemb'];
 $_SESSION['pseudoMemb'] = $membre[0]['pseudoMemb'];
-$_SESSION['numStat'] = (int)$membre[0]['numStat']; // Store the status (1 for admin, etc.)
+$_SESSION['numStat'] = (int)$membre[0]['numStat'];
 
-// 8. Redirection après login
 header('Location: /');
 exit;
-
-
-?>
