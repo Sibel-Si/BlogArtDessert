@@ -1,12 +1,26 @@
 <?php
-
-
 include '../../../header.php';
 
-// Load statuses for select if available
 $statuts = function_exists('sql_select') ? sql_select('STATUT', '*', null, null, 'libStat ASC') : [];
 ?>
 
+<!-- reCAPTCHA V3 -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LcBgWAsAAAAAJXlt-QCfOoIE1-qSXXHNFCa0usb"></script>
+
+<style>
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1;
+}
+</style>
+
+<main>
 <div class="container d-flex justify-content-center mt-4">
 	<div class="w-100" style="max-width:900px;">
 		<div class="d-flex justify-content-between align-items-center mb-3">
@@ -15,7 +29,9 @@ $statuts = function_exists('sql_select') ? sql_select('STATUT', '*', null, null,
 
 		<div class="card border-0 bg-transparent shadow-none">
 			<div class="card-body p-0">
+
 			<form id="memberCreateForm" method="post" action="<?php echo defined('ROOT_URL') ? ROOT_URL . '/api/members/create.php' : '../../api/members/create.php'; ?>">
+
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="pseudoMemb">Pseudo</label>
@@ -88,23 +104,24 @@ $statuts = function_exists('sql_select') ? sql_select('STATUT', '*', null, null,
 							<?php endforeach; ?>
 						</select>
 					</div>
-				</div> 
+				</div>
 
 				<div class="form-group">
-				<label>Sécurité</label>
-				<!-- Google reCAPTCHA v2 -->
-				<div class="g-recaptcha" data-sitekey="<?php echo getenv('RECAPTCHA_SITE_KEY'); ?>"></div>
-				<small class="form-text text-muted">Vérifiez que vous n'êtes pas un robot.</small>
-			</div>
-
-			<div class="d-flex gap-3 mt-4">
-				<a href="list.php" class="btn btn-moyen">List</a>
-				<button type="submit" class="btn btn-clair">Create</button>
+					<label>Sécurité</label>
+					<input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+					<small class="form-text text-muted">Vérifiez que vous n'êtes pas un robot.</small>
 				</div>
+
+				<div class="d-flex gap-3 mt-4">
+					<a href="list.php" class="btn btn-moyen">List</a>
+					<button type="submit" class="btn btn-clair">Create</button>
+				</div>
+
 			</form>
 		</div>
 	</div>
 </div>
+</main>
 
 <script>
 function togglePassword(){
@@ -117,52 +134,15 @@ function toggleConfirmPassword(){
 }
 
 document.getElementById('memberCreateForm').addEventListener('submit', function(e){
-	var pseudo = document.getElementById('pseudoMemb').value.trim();
-	if(pseudo.length < 6 || pseudo.length > 70){
-		alert('Le pseudo doit contenir entre 6 et 70 caractères.');
-		e.preventDefault(); return false;
-	}
-
-	var pass = document.getElementById('passMemb').value;
-	var confirm = document.getElementById('confirmPassMemb').value;
-	var email = document.getElementById('eMailMemb').value.trim();
-	var emailc = document.getElementById('confirmEmailMemb').value.trim();
-
-	// password policy
-	var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\s\S]{8,15}$/;
-	if(!passRegex.test(pass)){
-		alert('Le mot de passe doit contenir 8–15 caractères, au moins une majuscule, une minuscule et un chiffre.');
-		e.preventDefault(); return false;
-	}
-	if(pass !== confirm){
-		alert('Les mots de passe ne correspondent pas.');
-		e.preventDefault(); return false;
-	}
-	if(email === '' || emailc === '' || email !== emailc){
-		alert('Les adresses email doivent être identiques et valides.');
-		e.preventDefault(); return false;
-	}
-
-	// RGPD radio required check
-	var accordOui = document.getElementById('accordOui').checked;
-	if(!accordOui){
-		var accordNon = document.getElementById('accordNon').checked;
-		if(!accordNon){
-			alert('Vous devez répondre à la question RGPD.');
-			e.preventDefault(); return false;
-		}
-	}
-
-	// reCAPTCHA check: verify user has completed the challenge
-	var recaptchaResponse = document.querySelector('textarea[name="g-recaptcha-response"]');
-	if(!recaptchaResponse || recaptchaResponse.value === ''){
-		alert('Veuillez cocher la case reCAPTCHA pour confirmer que vous n\'êtes pas un robot.');
-		e.preventDefault(); return false;
-	}
-
-	// Server-side verification note: After form submission, verify the reCAPTCHA token in api/members/create.php
-	// using: https://www.google.com/recaptcha/api/siteverify with your SECRET_KEY
-	return true;
+	e.preventDefault();
+	grecaptcha.ready(function() {
+		grecaptcha.execute('6LcBgWAsAAAAAJXlt-QCfOoIE1-qSXXHNFCa0usb', {action: 'create'})
+		.then(function(token) {
+			document.getElementById('g-recaptcha-response').value = token;
+			document.getElementById('memberCreateForm').submit();
+		});
+	});
 });
 </script>
 
+<?php include '../../../footer.php'; ?>

@@ -46,7 +46,7 @@ include '../../../header.php';
         </div>
 
         <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
-        
+
         <div class="mt-4">
             <button type="submit" class="btn btn-success w-100">Créer mon compte</button>
         </div>
@@ -54,27 +54,17 @@ include '../../../header.php';
     </form>
 </div>
 
-
-
 <script>
 document.getElementById('signupForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
     grecaptcha.ready(function() {
-        grecaptcha.execute('6LcBgWAsAAAAAJXlt-QCfOoIE1-qSXXHNFCa0usb', {action: 'submit'}).then(function(token) {
+        grecaptcha.execute('6LcBgWAsAAAAAJXlt-QCfOoIE1-qSXXHNFCa0usb', {action: 'submit'})
+        .then(function(token) {
             document.getElementById('g-recaptcha-response').value = token;
             document.getElementById('signupForm').submit();
         });
     });
 });
-
-function togglePassword() {
-    const pass1 = document.querySelector('input[name="passMemb"]');
-    const pass2 = document.querySelector('input[name="passMembConfirm"]');
-    const type = (pass1.type === 'password') ? 'text' : 'password';
-    pass1.type = type;
-    pass2.type = type;
-}
 </script>
 
 <?php

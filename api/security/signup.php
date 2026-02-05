@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
     $secretKey = "6LcBgWAsAAAAAPOCwFqU7RpKNOrAZV6tagbaKL5S";
-    
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -27,19 +27,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
     curl_close($ch);
-    
+
     $captchaSuccess = json_decode($response);
 
     if (!$captchaSuccess->success || $captchaSuccess->score < 0.5) {
-        $errors[] = "La vérification de sécurité a échoué (Bot suspecté).";
+        $errors[] = "La vérification reCAPTCHA a échoué (robot suspecté).";
     }
 
+    if (strlen($pseudo) < 6 || strlen($pseudo) > 70) {
+        $errors[] = "Le pseudo doit contenir entre 6 et 70 caractères.";
+    }
+
+    $stmt = $pdo->prepare("SELECT pseudoMemb FROM membre WHERE pseudoMemb = ?");
+    $stmt->execute([$pseudo]);
+    if ($stmt->fetch()) {
+        $errors[] = "Ce pseudo existe déjà.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "L'email n'est pas valide.";
+    }
     if ($email !== $email2) {
         $errors[] = "Les emails ne correspondent pas.";
+    }
+
+    $regexPass = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,15}$/";
+
+    if (!preg_match($regexPass, $pass)) {
+        $errors[] = "Le mot de passe doit contenir 8-15 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.";
     }
     if ($pass !== $pass2) {
         $errors[] = "Les mots de passe ne correspondent pas.";
     }
+
     if ($accord !== "1") {
         $errors[] = "Vous devez accepter la conservation des données.";
     }
@@ -59,9 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $numStat = $stmt->fetchColumn();
 
         $sql = "INSERT INTO membre 
-                (pseudoMemb, prenomMemb, nomMemb, eMailMemb, passMemb, accordMemb, dtCreaMemb, numStat)
+                (pseudoMemb, prenomMemb, nomMemb, eMailMemb, passMemb, accordMemb, dtCreaMemb, dtModMemb, numStat)
                 VALUES 
-                (:pseudo, :prenom, :nom, :email, :pass, :accord, NOW(), :numStat)";
+                (:pseudo, :prenom, :nom, :email, :pass, :accord, NOW(), NULL, :numStat)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -70,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':nom'      => $nom,
             ':email'    => $email,
             ':pass'     => $passHash,
-            ':accord'   => ($accord === "1") ? 1 : 0,
+            ':accord'   => 1,
             ':numStat'  => $numStat
         ]);
 
@@ -82,3 +102,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+?>
