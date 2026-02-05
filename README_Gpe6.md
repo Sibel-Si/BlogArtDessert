@@ -17,3 +17,7 @@
 - **index.php** - Must be the homepage
 - **views** - All your pages
 - 
+
+Les logins/passwords (côté back et côté front) nous sont fournis, en clair, pour l'accès et le test du projet. (dans le readme_Gpe1.md),
+
+Le repo doit contenir le(s) readme_Gpe1.md du groupe 1 (allez voir le modèle "readme.md" à la racine du dossier) de l'état des lieux du projet (liste non exhaustive)

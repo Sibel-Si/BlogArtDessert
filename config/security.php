@@ -1,17 +1,26 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+// Define a constant to check if logged in anywhere in the app
+define('IS_LOGGED_IN', isset($_SESSION['id_user']));
+
 /**
- * Check if user is logged in with SESSION
+ * Call this function at the top of any page that needs protection.
+ * @param array $allowed_levels Example: [1, 2]
  */
-// session_start();
+function check_access($allowed_levels = []) {
+    if (!IS_LOGGED_IN) {
+        
+        header('Location: /views/backend/security/login.php');
+        exit;
+    }
 
-
- // hint : $_SESSION['USER_ID']
- // define constant ID_USER if user is logged in with define function
-
+    if (!empty($allowed_levels)) {
+        if (!in_array($_SESSION['numStat'], $allowed_levels)) {
+            // Redirect to home if they don't have the right rank
+            header('Location: /?error=unauthorized');
+            exit;
+        }
+    }
+}
 ?>
-
-
-
-<?php if (check_access(1)): ?>
-    <button class="btn-admin">Delete User</button>
-<?php endif; ?>
