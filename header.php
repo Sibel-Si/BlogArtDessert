@@ -51,7 +51,7 @@ unset($_SESSION['login_alert']);
     </div>
 
     <div class="d-flex align-items-center">
-      <form class="d-flex me-2" role="search">
+      <form class="d-flex me-2" role="search" action ="/views/frontend/search.php" method ="get">
           <input type="search" placeholder="Rechercher..." name="recherche" value="<?= isset($_GET['recherche']) ? htmlspecialchars($_GET['recherche']) : '' ?>">
       </form>
 
