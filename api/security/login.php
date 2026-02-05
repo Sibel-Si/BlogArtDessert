@@ -62,6 +62,8 @@ if ($pass !== $membre[0]['passMemb']) {
 }
 
 $_SESSION['id_user '] = $membre[0]['numMemb'];
+// 7. Connexion réussie → session
+$_SESSION['id_user'] = $membre[0]['numMemb'];
 $_SESSION['pseudoMemb'] = $membre[0]['pseudoMemb'];
 $_SESSION['numStat'] = (int)$membre[0]['numStat'];
 
