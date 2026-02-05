@@ -1,10 +1,13 @@
 <?php
 
+//CREATE NON AFFICHE
 include '../../../header.php';
 
-$articles = sql_select("ARTICLE", "*");
-$membres = sql_select("MEMBRE", "*");
-$commentaires = sql_select("COMMENT", "*");
+// $numCom = intval($_GET["numCom"]);
+//SELECT * FROM article INNER JOIN membre ON article.numMemb = membre.numMemb;
+$commentaire = sql_select("comment INNER JOIN membre ON comment.numMemb = membre.numMemb INNER JOIN article ON comment.numArt = article.numArt", "*");
+$commentaire = $commentaire[0];
+// var_dump($commentaire);
 
 // récuparation avec session  puis affichage nom prénom
 ?>
@@ -15,23 +18,15 @@ $commentaires = sql_select("COMMENT", "*");
         </div>
         <div class="col-md-12">
             <!-- Form to create a new statut -->
-            <form action="<?php echo ROOT_URL . '/api/comments/create.php' ?>" method="post">
+            <form action="<?php echo ROOT_URL . '/api/comments/create.php' ?>" method="get">
                 <div class="form-group">
                     <label for="numMemb">Pseudo</label>
-                    <select id="numMemb" name="numMemb" class="form-control" autofocus="autofocus" >
-                        <?php
-                        foreach($membres as $membre){ //selection membre par pseudo
-                            echo('<option value ="'. $membre["numMemb"]. '">'. $membre['pseudoMemb']. '</option>');
-                        }
-                        ?>
-                    </select>
+                    <input id="libStat" name="libStat" class="form-control" type="text" value ="">
                 </div>
                 <br />
                 <div class="form-group">
                     <label for="libStat" >Nom</label>
-                    <input id="libStat" name="libStat" class="form-control" type="text" value="<?php /*
-                    $nomMembActu = sql_select("MEMBRE", "nomMemb", "pseudoMemb =" $pseudoMemb);
-                    echo() */?>" disabled /> <!--récup choix id prenom + nom avant de les envoyer-->
+                    <input id="libStat" name="libStat" class="form-control" type="text" value=""/> <!--récup choix id prenom + nom avant de les envoyer-->
                 </div>
                 <br />
                 <div class="form-group">
@@ -52,14 +47,18 @@ $commentaires = sql_select("COMMENT", "*");
                 <h2>Commentaire</h2>
                 <div class="form-group">
                     <label for="libStat" class = "disabled">Création d'un commentaire</label>
-                    <textarea id="libStat" name="libStat" class="form-control">Entrez le commentaire</textarea>
+                    <textarea id="libStat" name="libStat" placeholder ="Entrez le commentaire" class="form-control"></textarea>
                 </div>
                 <div class="form-group mt-2">
                     <button type="submit" class="btn btn-clair">Poster</button>
                 </div>
             </form>
-            <h3> Commentaires de l'article :<?php echo("")?></h3>
-            
+            <br />
+            <h3> Commentaires de l'article :<?php echo($commentaire["numCom"])?></h3>
+            <h4><?php echo($commentaire["pseudoMemb"]);?></h4>
+            <?php echo($commentaire["libCom"]);?>
+            <br />
+            <?php echo($commentaire["dtCreaCom"]);?> <br /><br />
             <a href="list.php" class="btn btn-moyen">List</a>
         </div>
     </div>
