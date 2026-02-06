@@ -83,8 +83,9 @@ function getMemberPseudo($id, $membres) {
                             <td><?php echo getMemberPseudo($commentaire['numMemb'], $membres); ?></td> 
                             <td><?php echo($commentaire['dtModCom']); ?></td>
                             <td><?php echo($commentaire['libCom']); ?></td>
-                            <td><?php echo($commentaire['attModOK']); ?></td>
-                            <td><?php echo($commentaire['attModOK']); ?></td>
+                            <td><?php if ($commentaire['attModOK']==0){ echo("Publié"); } 
+                            else { echo("Suppression Logique"); } ?></td>
+                            <td><?php echo($commentaire['notifComKOAff']); ?></td>
                             <td>
                                 <a href="edit.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-clair">Edit</a>
                             </td>
@@ -107,10 +108,12 @@ function getMemberPseudo($id, $membres) {
                 <tbody>
                     <?php foreach($commentaireSupLog as $commentaire){ ?>
                         <tr>
-                            <td><?php echo getArticleTitle($commentaire['numArt'], $articles); ?></td>
                             <td><?php echo getMemberPseudo($commentaire['numMemb'], $membres); ?></td> 
-                            <td><?php echo($commentaire['dtCreaCom']); ?></td>
+                            <td><?php echo($commentaire['dtDelLogCom']); ?></td>
                             <td><?php echo($commentaire['libCom']); ?></td>
+                            <td><?php if ($commentaire['attModOK']==0){ echo("Publié"); } 
+                            else { echo("Suppression Logique"); } ?></td>
+                            <td><?php echo($commentaire['notifComKOAff']); ?></td>
                             <td>
                                 <a href="edit.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-moyen">Edit</a>
                             </td>
@@ -123,7 +126,7 @@ function getMemberPseudo($id, $membres) {
                 <thead>
                     <tr>
                         <th>Pseudo</th>
-                        <th>Date Suppression Physique</th>
+                        <th>Date Suppression Logique</th>
                         <th>Contenu</th>
                         <th>Publication</th>
                         <th>Raison refus</th>
@@ -133,10 +136,11 @@ function getMemberPseudo($id, $membres) {
                 <tbody>
                     <?php foreach($commentaireSupLog as $commentaire){ ?>
                         <tr>
-                            <td><?php echo($infosMembArt["pseudoMemb"]); ?></td> <!--faire en sorte de mettre le titre des articles-->
-                            <td><?php echo($commentaire["dtDelLogCom"]); ?></td> <!-- idem pour pseudo-->
+                            <td><?php echo getMemberPseudo($commentaire['numMemb'], $membres); ?></td> 
+                            <td><?php echo($commentaire['dtDelLogCom']); ?></td>
                             <td><?php echo($commentaire['libCom']); ?></td>
-                            <td><?php echo($commentaire['delLogiq']); ?></td>
+                            <td><?php if ($commentaire['attModOK']==0){ echo("Publié"); } 
+                            else { echo("Suppression Logique"); } ?></td>
                             <td><?php echo($commentaire['notifComKOAff']); ?></td>
                             <td>
                                 <a href="delete.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-fonce">Delete</a>
