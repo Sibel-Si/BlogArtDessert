@@ -28,4 +28,18 @@ Login Membre:
     Pseudo: Membre
     MDP: Membre0000
 
-Etat des lieux projet (a remplir vendredi soir)
+Etat de la base de donnée:
+
+    Des Membres, Statut, Articles, Mots-cles, Thématiques, Commentaires, Likes/Unlike ont été créés pour être supprimés et modifiés.
+
+Etat des lieux du projet: 
+    - Tous les CRUDs fonctionnenent
+    - Les pages admins sont sécurisées, même par URLs.
+    - Admins et Modérateurs ont les même perms, sauf la suppression définitive d'un commentaire et toutes les actions associées au Membres.
+    - Les CAPTCHAs sont toujours hors service, comme discuté précédemment.
+    - Les pages views\frontend\actors.php
+                views\frontend\events.php
+                views\frontend\movements.php
+                views\frontend\original.php    existent mais ne sont pas accessible via le site, et ne contiennent pas les articles.
+
+Dernier push GitHub 16h30

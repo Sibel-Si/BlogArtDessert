@@ -21,8 +21,8 @@ if(isset($_GET['numStat'])){
             <!-- Form to edit a  statut -->
             <form action="<?php echo ROOT_URL . '/api/statuts/update.php' ?>" method="post">
                 <div class="form-group">
-                    <label for="libStat">Id du statut</label>
-                    <input id="numStat" name="numStat" class="form-control"  type="text" value="<?php echo($numStat); ?>" readonly="readonly"disabled/>
+                    <label for="numStat">Id du statut</label>
+                    <input id="numStat" name="numStat" class="form-control"  type="text" value="<?php echo($numStat); ?>" readonly="readonly"/>
                 </div>
                 <div class="form-group">
                     <label for="libStat">Nom du statut</label>

@@ -18,7 +18,7 @@ if(empty($numCom)){
 if ($numCom > 0) {
     if ($validate === "oui") {
         // Validation: reset rejection reason and set moderation to 1
-        sql_update("COMMENT", "attModOK=1, notifComKOAff=''", "numCom = $numCom");
+        sql_update("COMMENT", "attModOK=1, notifComKOAff='', delLogiq=0", "numCom = $numCom");
         
     } elseif ($validate === "non") {
         // Refusal: Logic delete, set date, and save the reason

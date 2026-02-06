@@ -31,6 +31,7 @@ $statLib = '—';
 if (isset($member['numStat'])) {
     $s = sql_select('STATUT', 'libStat', 'numStat = ' . $member['numStat']);
     if ($s && count($s) > 0) $statLib = $s[0]['libStat'];
+    $isBlocked = true;
 }
 
 $dtCreation = isset($member['dtCreaMemb']) ? date('d/m/Y H:i:s', strtotime($member['dtCreaMemb'])) : '—';

@@ -90,6 +90,7 @@ function getMemberPseudo($id, $membres) {
                             <td><?php echo($commentaire['notifComKOAff']); ?></td>
                             <td>
                                 <a href="edit.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-clair">Edit</a>
+                                <a href="control.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-moyen">Edit Control</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -117,6 +118,7 @@ function getMemberPseudo($id, $membres) {
                             else { echo("Suppression Logique"); } ?></td>
                             <td><?php echo($commentaire['notifComKOAff']); ?></td>
                             <td>
+                                <a href="edit.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-clair">Edit</a>
                                 <a href="control.php?numCom=<?php echo($commentaire['numCom']); ?>" class="btn btn-moyen">Edit Control</a>
                             </td>
                         </tr>

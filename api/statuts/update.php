@@ -13,6 +13,6 @@ if(empty($libStat)){
     header('Location: ../../views/backend/statuts/list.php');
 }
 
-sql_update('STATUT', "libStat = '$libStat'", "numMotCle = $numStat");
+sql_update('STATUT', "libStat = '$libStat'", "numStat = $numStat");
 
 header('Location: ../../views/backend/statuts/list.php');
